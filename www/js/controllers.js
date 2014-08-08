@@ -43,9 +43,13 @@ angular.module('starter.controllers', [])
             {title: 'Cowbell', id: 6}
         ];
 
+        $scope.iterations = 0;
+
         document.addEventListener('deviceready', function () {
             console.log('Init Called');
+            window.plugin.backgroundMode.enable();
             setInterval(function () {
+                $scope.iterations++;
                 navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
             }, 1000);
         }, false);
@@ -69,4 +73,4 @@ angular.module('starter.controllers', [])
     })
 
     .controller('PlaylistCtrl', function ($scope, $stateParams) {
-    })
+    });

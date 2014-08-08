@@ -10,6 +10,9 @@
             <ion-item nav-clear menu-close href="#/app/playlists">
                 Latitude: {{ coords.latitude }}
             </ion-item>
+            <ion-item nav-clear menu-close href="#/app/playlists">
+                Iterations: {{ iterations }}
+            </ion-item>
             <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
                 {{playlist.title}}
             </ion-item>
