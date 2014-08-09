@@ -70,12 +70,11 @@ angular.module('starter.controllers', [])
         $scope.fbLoginStatus = 'Waiting for click';
         $scope.initFb = function () {
             $scope.fbLoginStatus = 'clicked';
-            facebookConnectPlugin.browserInit('566304933457592');
-            facebookConnectPlugin.login(function () {
+
+            openFB.init({appId: '566304933457592'});
+            openFB.login(function () {
                 $scope.fbLoginStatus = 'success';
-            }, function () {
-                $scope.fbLoginStatus = 'error';
-            });
+            }, {scope: 'email'});
         };
     })
 
