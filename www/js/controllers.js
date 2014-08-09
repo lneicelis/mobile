@@ -3,6 +3,7 @@ angular.module('starter.controllers', [])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
         // Form data for the login modal
         $scope.loginData = {};
+        $scope.fbLoginStatus = 'Loading..';
 
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -13,12 +14,18 @@ angular.module('starter.controllers', [])
 
         // Triggered in the login modal to close it
         $scope.closeLogin = function () {
-            $scope.modal.hide();
+            //$scope.modal.hide();
         };
 
         // Open the login modal
         $scope.login = function () {
-            $scope.modal.show();
+            facebookConnectPlugin.browserInit('566304933457592');
+            facebookConnectPlugin.login(function () {
+                $scope.fbLoginStatus = 'success';
+            }, function () {
+                $scope.fbLoginStatus = 'error';
+            });
+            //$scope.modal.show();
         };
 
         // Perform the login action when the user submits the login form
@@ -35,7 +42,7 @@ angular.module('starter.controllers', [])
 
     .controller('PlaylistsCtrl', function ($scope) {
         $scope.playlists = [
-            {title: 'Reggae', id: 1},
+            {title: 'Reggae', id: 1}
         ];
 
         $scope.iterations = 0;
