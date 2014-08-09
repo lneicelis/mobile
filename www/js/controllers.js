@@ -68,12 +68,19 @@ angular.module('starter.controllers', [])
         };
 
         $scope.fbLoginStatus = 'Waiting for click';
+        $scope.fbAccessToken = 'No access token';
         $scope.initFb = function () {
             $scope.fbLoginStatus = 'clicked';
 
             openFB.init({appId: '566304933457592'});
-            openFB.login(function () {
-                $scope.fbLoginStatus = 'success';
+            openFB.login(function (response) {
+                if (response.status == 'connected')
+                    $scope.fbLoginStatus = 'Success. Auth token:';
+                    $scope.fbAccessToken = response.token;
+                if (response.status == 'not_authorized')
+                    $scope.fbLoginStatus = response.error;
+                if (response.status == 'unknown')
+                    $scope.fbLoginStatus = 'Unknown';
             }, {scope: 'email'});
         };
     })
