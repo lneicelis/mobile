@@ -72,18 +72,24 @@ angular.module('starter.controllers', [])
         $scope.initFb = function () {
             $scope.fbLoginStatus = 'clicked';
 
-            openFB.init({appId: '566304933457592'});
-            openFB.login(function (response) {
-                if (response.status == 'connected')
-                    $scope.fbLoginStatus = 'Success. Auth token:'.response.token;
-                if (response.status == 'not_authorized')
-                    $scope.fbLoginStatus = response.error;
-                if (response.status == 'unknown')
-                    $scope.fbLoginStatus = 'Unknown';
-            }, {scope: 'email'});
-            openFB.getLoginStatus(function (obj) {
-                $scope.fbResponseObj = JSON.stringify(obj);
+            facebookConnectPlugin.getLoginStatus(function () {
+                $scope.fbLoginStatus = 'Success';
+            }, function () {
+                $scope.fbLoginStatus = 'Error';
             });
+
+            //openFB.init({appId: '566304933457592'});
+            //openFB.login(function (response) {
+            //    if (response.status == 'connected')
+            //        $scope.fbLoginStatus = 'Success. Auth token:'.response.token;
+            //    if (response.status == 'not_authorized')
+            //        $scope.fbLoginStatus = response.error;
+            //    if (response.status == 'unknown')
+            //        $scope.fbLoginStatus = 'Unknown';
+            //}, {scope: 'email'});
+            //openFB.getLoginStatus(function (obj) {
+            //    $scope.fbResponseObj = JSON.stringify(obj);
+            //});
         };
     })
 
