@@ -38,11 +38,14 @@ angular.module('starter.controllers', [])
             {title: 'Reggae', id: 1},
         ];
 
-        facebookConnectPlugin.browserInit('566304933457592');
-        facebookConnectPlugin.login(function () {
-            $scope.fbLoginStatus = 'Success';
-        }, function () {
-            $scope.fbLoginStatus = 'Failure';
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                $scope.fbLoginStatus = 'success';
+            }
+            else {
+                $scope.fbLoginStatus = 'error';
+                FB.login();
+            }
         });
 
         $scope.iterations = 0;
