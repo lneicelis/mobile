@@ -19,12 +19,6 @@ angular.module('starter.controllers', [])
 
         // Open the login modal
         $scope.login = function () {
-            facebookConnectPlugin.browserInit('566304933457592');
-            facebookConnectPlugin.login(function () {
-                $scope.fbLoginStatus = 'success';
-            }, function () {
-                $scope.fbLoginStatus = 'error';
-            });
             //$scope.modal.show();
         };
 
@@ -71,6 +65,16 @@ angular.module('starter.controllers', [])
                 longitude: "Error",
                 latitude: "Error"
             }
+        };
+
+        $scope.fbLoginStatus = 'Waiting for click';
+        $scope.initFb = function () {
+            facebookConnectPlugin.browserInit('566304933457592');
+            facebookConnectPlugin.login(function () {
+                $scope.fbLoginStatus = 'success';
+            }, function () {
+                $scope.fbLoginStatus = 'error';
+            });
         };
     })
 
