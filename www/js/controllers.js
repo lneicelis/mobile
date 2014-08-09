@@ -69,8 +69,9 @@ angular.module('starter.controllers', [])
 
         $scope.fbLoginStatus = 'Waiting for click';
         $scope.initFb = function () {
-            window.plugin.facebookConnectPlugin.browserInit('566304933457592');
-            window.plugin.facebookConnectPlugin.login(function () {
+            $scope.fbLoginStatus = 'clicked';
+            facebookConnectPlugin.browserInit('566304933457592');
+            facebookConnectPlugin.login(function () {
                 $scope.fbLoginStatus = 'success';
             }, function () {
                 $scope.fbLoginStatus = 'error';
