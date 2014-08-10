@@ -66,7 +66,8 @@ angular.module('starter.controllers', [])
                 latitude: "Error"
             }
         };
-
+    })
+    .controller('ProfileCtrl', function ($scope) {
         $scope.fbLoginStatus = 'Waiting for click';
         $scope.fbAccessToken = 'No access token';
         $scope.initFb = function () {
@@ -86,6 +87,5 @@ angular.module('starter.controllers', [])
             });
         };
     })
-
     .controller('PlaylistCtrl', function ($scope, $stateParams) {
     });

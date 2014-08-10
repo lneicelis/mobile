@@ -13,15 +13,6 @@
             <ion-item nav-clear menu-close href="#/app/playlists">
                 Iterations: {{ iterations }}
             </ion-item>
-            <ion-item nav-clear menu-close href="#/app/playlists">
-                Fb Login Status: {{ fbLoginStatus }}
-            </ion-item>
-            <ion-item nav-clear menu-close ng-click="initFb()">
-                FB login status: {{ fbLoginStatus }}
-            </ion-item>
-            <ion-item nav-clear menu-close ng-click="initFb()">
-                FB response obj: {{ fbResponseObj }}
-            </ion-item>
             <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
                 {{playlist.title}}
             </ion-item>
