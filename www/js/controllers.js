@@ -78,11 +78,6 @@ angular.module('starter.controllers', [])
             openFB.login(function (response) {
                 if (response.status == 'connected')
                     $scope.fbLoginStatus = 'Success. Auth token:'.response.token;
-                    openFB.api({path: '/me', success: function (response) {
-                        $scope.fbUser = JSON.stringify(response);
-                    }, error: function () {
-                        $scope.fbUser = 'Error!';
-                    }});
                 if (response.status == 'not_authorized')
                     $scope.fbLoginStatus = response.error;
                 if (response.status == 'unknown')
@@ -92,6 +87,13 @@ angular.module('starter.controllers', [])
                 $scope.fbResponseObj = JSON.stringify(obj);
             });
         };
+        $scope.fbGetUser = function () {
+            openFB.api({path: '/me', success: function (response) {
+                $scope.fbUser = JSON.stringify(response);
+            }, error: function () {
+                $scope.fbUser = 'Error!';
+            }});
+        }
     })
     .controller('PlaylistCtrl', function ($scope, $stateParams) {
     });
