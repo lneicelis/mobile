@@ -70,6 +70,7 @@ angular.module('starter.controllers', [])
     .controller('ProfileCtrl', function ($scope) {
         $scope.fbLoginStatus = 'Waiting for click';
         $scope.fbAccessToken = 'No access token';
+        $scope.fbUser = 'User is not set';
         $scope.initFb = function () {
             $scope.fbLoginStatus = 'clicked';
 
@@ -77,6 +78,11 @@ angular.module('starter.controllers', [])
             openFB.login(function (response) {
                 if (response.status == 'connected')
                     $scope.fbLoginStatus = 'Success. Auth token:'.response.token;
+                    openFB.api({path: '/me', success: function (response) {
+                        $scope.fbUser = JSON.stringify(response);
+                    }, error: function () {
+                        $scope.fbUser = 'Error!';
+                    }});
                 if (response.status == 'not_authorized')
                     $scope.fbLoginStatus = response.error;
                 if (response.status == 'unknown')
