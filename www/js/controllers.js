@@ -72,20 +72,13 @@ angular.module('starter.controllers', [])
         $scope.fbAccessToken = 'No access token';
         $scope.fbUser = 'User is not set';
         $scope.initFb = function () {
-            $scope.fbLoginStatus = 'clicked';
-
-            openFB.init({appId: '566304933457592'});
-            openFB.login(function (response) {
-                if (response.status == 'connected')
-                    $scope.fbLoginStatus = 'Success. Auth token:'.response.token;
-                if (response.status == 'not_authorized')
-                    $scope.fbLoginStatus = response.error;
-                if (response.status == 'unknown')
-                    $scope.fbLoginStatus = 'Unknown';
-            }, {scope: 'email'});
-            openFB.getLoginStatus(function (obj) {
-                $scope.fbResponseObj = JSON.stringify(obj);
-            });
+            OAuth.popup('facebook')
+                .done(function (result) {
+                    $scope.fbAccessToken = JSON.stringify(result);
+                })
+                .fail(function (error) {
+                    $scope.fbAccessToken = JSON.stringify(error);
+                })
         };
         $scope.fbGetUser = function () {
             openFB.api({path: '/me', success: function (response) {
